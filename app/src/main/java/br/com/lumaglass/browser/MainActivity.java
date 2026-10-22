@@ -238,6 +238,13 @@ public final class MainActivity extends Activity {
             .useTrackingProtection(prefs.getBoolean("track",true));
         tab.session=new GeckoSession(settings.build());
         applyUA(tab);
+        attachNavigation(tab);
+        attachDelegates(tab);
+        tab.session.open(runtime);
+        tabs.add(tab);
+        if(select)selectTab(tab);
+    }
+    private void attachNavigation(Tab tab){
         tab.session.setNavigationDelegate(new GeckoSession.NavigationDelegate(){
             @Override public void onLocationChange(GeckoSession s,String url,
                  List<GeckoSession.PermissionDelegate.ContentPermission> perms,Boolean userGesture){
@@ -252,15 +259,11 @@ public final class MainActivity extends Activity {
                     .usePrivateMode(child.privateMode)
                     .useTrackingProtection(prefs.getBoolean("track",true));
                 child.session=new GeckoSession(childSettings.build());applyUA(child);
-                tabs.add(child);attachDelegates(child);
+                tabs.add(child);attachNavigation(child);attachDelegates(child);
                 child.session.open(runtime);selectTab(child);
                 return GeckoResult.fromValue(child.session);
             }
         });
-        attachDelegates(tab);
-        tab.session.open(runtime);
-        tabs.add(tab);
-        if(select)selectTab(tab);
     }
     private void attachDelegates(Tab tab){
         tab.session.setProgressDelegate(new GeckoSession.ProgressDelegate(){
@@ -476,6 +479,7 @@ public final class MainActivity extends Activity {
         new AlertDialog.Builder(this).setTitle("Configurações").setItems(options,(d,i)->{
             switch(i){
                 case 0:chooseUA();break;case 1:chooseSearch();break;case 2:
+                    if(web!=null && active!=null)web.releaseSession();
                     dark=!dark;prefs.edit().putBoolean("dark",dark).apply();buildLayout();
                     if(active!=null){web.setSession(active.session);refreshBar();homepage.setVisibility(showHome?View.VISIBLE:View.GONE);}
                     break;
