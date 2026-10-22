@@ -20,7 +20,7 @@ jobs:
           SDK="$ANDROID_HOME"
           TOOL="$(find "$SDK/cmdline-tools" -type f -name sdkmanager | head -1)"
           yes | "$TOOL" --sdk_root="$SDK" --licenses >/dev/null || true
-          "$TOOL" --sdk_root="$SDK" --install "platforms;android-37" "build-tools;36.0.0"
+          "$TOOL" --sdk_root="$SDK" --install "platforms;android-37.0" "build-tools;36.0.0" --channel=3
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '9.3.1'
