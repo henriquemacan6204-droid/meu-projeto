@@ -15,15 +15,15 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Instalar SDK Android 36
+      - name: Instalar SDK Android 37
         run: |
           SDK="$ANDROID_HOME"
           TOOL="$(find "$SDK/cmdline-tools" -type f -name sdkmanager | head -1)"
           yes | "$TOOL" --sdk_root="$SDK" --licenses >/dev/null || true
-          "$TOOL" --sdk_root="$SDK" --install "platforms;android-36" "build-tools;36.0.0"
+          "$TOOL" --sdk_root="$SDK" --install "platforms;android-37" "build-tools;36.0.0"
       - uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '8.13'
+          gradle-version: '9.3.1'
       - name: Compilar APK Android
         run: gradle :app:assembleDebug --no-daemon --stacktrace
       - name: Disponibilizar APK
