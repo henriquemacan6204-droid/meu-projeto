@@ -1,7 +1,7 @@
 plugins { id 'com.android.application' }
 android {
  namespace 'br.com.lumaglass.browser'
- compileSdk 35
+ compileSdk 36
  defaultConfig {
   applicationId 'br.com.lumaglass.browser'
   minSdk 26
