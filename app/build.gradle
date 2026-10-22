@@ -1,0 +1,16 @@
+plugins { id 'com.android.application' }
+android {
+ namespace 'br.com.lumaglass.browser'
+ compileSdk 35
+ defaultConfig {
+  applicationId 'br.com.lumaglass.browser'
+  minSdk 26
+  targetSdk 34
+  versionCode 1
+  versionName '0.1.0-gecko'
+ }
+ compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+ buildTypes { release { minifyEnabled false }; debug { minifyEnabled false } }
+ packaging { jniLibs { useLegacyPackaging = true } }
+}
+dependencies { implementation 'org.mozilla.geckoview:geckoview:158.0.20261019185856' }

@@ -1,0 +1,11 @@
+<resources>
+ <style name="LumaTheme" parent="android:style/Theme.Material.NoActionBar">
+  <item name="android:fontFamily">sans</item>
+  <item name="android:windowLightStatusBar">false</item>
+  <item name="android:colorAccent">#A6BCFF</item>
+  <item name="android:windowActionModeOverlay">true</item>
+  <item name="android:navigationBarColor">#090C13</item>
+  <item name="android:statusBarColor">#090C13</item>
+  <item name="android:windowLightNavigationBar">false</item>
+ </style>
+</resources>
